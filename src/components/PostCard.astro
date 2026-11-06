@@ -1,0 +1,7 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import Tag from './Tag.astro';
+interface Props {entry:CollectionEntry<'posts'>}
+const {entry}=Astro.props;const d=entry.data;const href=`/posts/${d.slug}/`;
+---
+<div data-tags={d.tags.join(',')}><div class="post-card">{d.image&&<div class="card-image-wrap"><a href={href}><img class="card-image" src={d.image} alt={d.imageAlt}/></a></div>}<div class="card-body"><h5><a href={href}>{d.title}</a></h5><div class="tags-row">{d.tags.map(t=><Tag name={t} filter/>)}</div><a href={href} class="excerpt-link"><p class="excerpt"><Fragment set:html={d.summaryHtml}/></p></a></div></div></div>

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+playwright-report/
+test-results/
+.DS_Store
+
+# Local archives and reference captures are not website source.
+backups/
+reference/
+deployment/
+*.tar.gz

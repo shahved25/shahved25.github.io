@@ -1,0 +1,9 @@
+---
+import {getCollection} from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import ResearchCard from '../../components/ResearchCard.astro';
+import {researchTags} from '../../data/tags';
+const research=(await getCollection('research')).sort((a,b)=>a.data.cardOrder-b.data.cardOrder);
+---
+<SiteLayout section="Research"><FilterBar tags={researchTags}/><div class="research-archive">{research.map(entry=><ResearchCard entry={entry}/>)}</div></SiteLayout>

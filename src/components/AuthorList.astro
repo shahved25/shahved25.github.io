@@ -1,0 +1,6 @@
+---
+interface Author {name:string;url?:string;html:string;hidden?:boolean}
+interface Props {authors:Author[];visibleAuthorCount?:number}
+const {authors,visibleAuthorCount}=Astro.props;
+---
+<div class="authors-row">{authors.map((a,index)=><Fragment>{visibleAuthorCount===index&&<button class="authors-ellipsis" aria-label="Show all authors" aria-expanded="false">…,&nbsp;</button>}<span class:list={['author',{'author-hidden':a.hidden}]}><Fragment set:html={a.html}/></span></Fragment>)}</div>

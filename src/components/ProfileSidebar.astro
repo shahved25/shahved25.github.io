@@ -1,0 +1,13 @@
+---
+import SocialLinks from './SocialLinks.astro';
+import TableOfContents from './TableOfContents.astro';
+import {profile} from '../data/profile';
+interface Props {toc?: Array<{id:string; text:string;level:number}>; section:string}
+const {toc=[],section}=Astro.props;
+
+---
+<div class="sidebar-col"><div class="sidebar-affix"><aside class="sidebar-inner">
+<img class="profile-avatar" src="/avatar.png" alt={profile.name} width="1024" height="1024" />
+<div class="name-section"><h2>{profile.firstName}&nbsp;<span>{profile.lastName}</span></h2><div class="social-row"><SocialLinks /></div><div class="contact-block"><div class="contact-item"><i class="fas fa-map-marker-alt fa-fw" aria-hidden="true"></i><span>{profile.location}</span></div></div><div class="sidebar-quote"><span class="quote-mark open">“</span> <span class="sidebar-quote-text">{profile.tagline}</span> <span class="quote-mark close">”</span></div></div>
+{toc.length>0&&<TableOfContents headings={toc} section={section}/>}
+</aside></div></div>

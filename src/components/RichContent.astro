@@ -1,0 +1,7 @@
+---
+/** Trusted, reviewed public article blocks. Scripts and source framework attributes
+ * are removed during import; no runtime fetching or user-provided HTML occurs. */
+interface Props {html:string}
+const {html}=Astro.props;
+---
+<Fragment set:html={html}/>

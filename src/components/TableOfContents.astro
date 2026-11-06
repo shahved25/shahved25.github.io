@@ -1,0 +1,5 @@
+---
+interface Props {headings:Array<{id:string;text:string;level:number}>;section:string}
+const {headings,section}=Astro.props;
+---
+<div class:list={['toc-area',{'post-toc':section==='Posts'}]}><hr/><nav class="toc-nav" id="toc-nav" aria-label="Table of Contents"><h3>Table of Contents</h3><ul class="toc-list">{headings.map(h=><li><a href={'#'+h.id} data-toc-id={h.id} style={`padding-left:${h.level}em`}>{h.text}</a></li>)}</ul></nav></div>

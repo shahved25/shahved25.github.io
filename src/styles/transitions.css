@@ -1,0 +1,29 @@
+/* Start the brief page fade during the heading switch. */
+::view-transition-image-pair(root) { isolation: isolate; }
+::view-transition-old(root) {
+  mix-blend-mode: plus-lighter;
+  animation: .1s ease-in-out .15s both page-fade;
+}
+::view-transition-new(root) {
+  mix-blend-mode: plus-lighter;
+  animation: .1s ease-in-out .15s reverse both page-fade;
+}
+@keyframes page-fade {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+::view-transition-group(tab-about),
+::view-transition-group(tab-experience),
+::view-transition-group(tab-research),
+::view-transition-group(tab-posts) {
+  animation-duration: .4s;
+  animation-timing-function: ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+}
+
+/* Native transition snapshots have their own stacking order. */
+::view-transition-group(aurora-background) { z-index: -1; }

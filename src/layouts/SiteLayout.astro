@@ -1,0 +1,16 @@
+---
+import '../styles/global.css';
+import AuroraBackground from '../components/AuroraBackground.astro';
+import {ClientRouter} from 'astro:transitions';
+import '../styles/transitions.css';
+import '../styles/content.css';
+import ProfileSidebar from '../components/ProfileSidebar.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import SiteNavigation from '../components/SiteNavigation.astro';
+import {profile} from '../data/profile';
+interface Props {section:string;title?:string;toc?:Array<{id:string;text:string;level:number}>}
+const {section,title,toc=[]}=Astro.props;
+
+---
+<!doctype html><html lang="en"><head><ClientRouter/><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Ved Shah — computer engineering, AI research, and software projects."/><meta name="author" content={profile.name}/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/icons/academicons.min.css"/><title>{title?`${title} | Ved Shah`:section==='About'?'Ved Shah':`${section} | Ved Shah`}</title><script is:inline>try{const saved=localStorage.getItem('theme');document.documentElement.dataset.theme=saved||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}</script></head><body><AuroraBackground/><div class="outer-padding"><div class="container"><header class="site-header"><div class="nav-wrap"><ThemeToggle/></div></header><div class="main-wrapper"><div class="mobile-profile"><img class="mobile-avatar" src="/avatar.png" alt={profile.name} width="110" height="110"/><div class="mobile-profile-info"><div class="mobile-row"><div class="mobile-name-block"><span class="mobile-name">{profile.firstName}&nbsp;<span class="mobile-name-last">{profile.lastName}</span></span></div><ThemeToggle mobile/></div><div class="mobile-row"><div class="mobile-social"><SocialLinks/></div><span class="mobile-quote"><span class="mobile-quote-mark">“</span><span>{profile.tagline}</span><span class="mobile-quote-mark">”</span></span></div></div></div><div class="layout-grid"><ProfileSidebar toc={toc} section={section}/><main class="content-col"><SiteNavigation section={section}/><slot/></main></div></div><footer>Last Updated on Oct 26, 2026</footer></div></div><script>import '../scripts/theme';import '../scripts/filters';import '../scripts/toc';import '../scripts/cards';</script></body></html>

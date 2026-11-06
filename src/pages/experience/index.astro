@@ -1,0 +1,5 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import experience from '../../data/experience.json';
+---
+<SiteLayout section="Experience">{experience.map(s=><Fragment set:html={s.html}/>)}</SiteLayout>

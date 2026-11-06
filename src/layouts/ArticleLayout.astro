@@ -1,0 +1,8 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import SiteLayout from './SiteLayout.astro';
+import Tag from '../components/Tag.astro';
+interface Props {entry:CollectionEntry<'posts'>|CollectionEntry<'research'>}
+const {entry}=Astro.props;const d=entry.data;const research=d.section==='Research';
+---
+<SiteLayout section={d.section} title={d.title} toc={d.toc}><h1 class="post-title" style={!research?'font-family:var(--font-mono)':undefined}>{d.title}</h1>{research?<><p class="article-authors">{d.authors.map((a,index)=><Fragment><Fragment set:html={a.html.replace(/,&nbsp;$/,'')}/>{index<d.authors.length-1&&<Fragment>, </Fragment>}</Fragment>)}</p><div class="article-meta"><span>{d.date}</span><span style="color:var(--color-border)">|</span><span class="venue font-medium"><Fragment set:html={d.venueHtml}/></span></div></>:d.date&&<p class="article-date">{d.date}</p>}<div class="tags-row article-tags">{d.tags.map((tag,index)=><Tag name={tag} color={['magenta','red','volcano','orange','gold','lime','green'][index]} href={`/${research?'research':'posts'}?tag=${encodeURIComponent(tag)}`}/>)}</div><article class:list={['markdown-body','mt-6',{'research-detail':research}]}><slot/></article></SiteLayout>

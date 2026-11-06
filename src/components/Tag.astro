@@ -1,0 +1,8 @@
+---
+import {colors} from '../data/tags';
+interface Props {name:string;href?:string;filter?:boolean;color?:string}
+const {name,href,filter=false,color:overrideColor}=Astro.props;
+const color=overrideColor||colors[name]||'blue';
+const style=`color:var(--color-tag-${color}); background:var(--color-tag-${color}-bg);`;
+---
+{href?<a class="tag" style={style} href={href}>{name}</a>:<span class="tag" style={style} data-tag-name={filter?name:undefined}>{name}</span>}

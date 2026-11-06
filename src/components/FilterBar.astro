@@ -1,0 +1,6 @@
+---
+import {colors} from '../data/tags';
+interface Props {tags:string[]}
+const {tags}=Astro.props;
+---
+<div class="filter-panel" role="group" aria-label="Filters"><span class="filter-label">Filters</span><div class="filter-content"><span class="tags-label">Tags:</span>{tags.map(tag=><button class="filter-tag" data-tag={tag} aria-pressed="false" style={`color:var(--color-tag-${colors[tag]});background:var(--color-tag-${colors[tag]}-bg)`}>{tag}</button>)}</div></div>

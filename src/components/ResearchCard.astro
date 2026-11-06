@@ -1,0 +1,8 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import AuthorList from './AuthorList.astro';
+import Tag from './Tag.astro';
+interface Props {entry:CollectionEntry<'research'>;linkedTags?:boolean}
+const {entry,linkedTags=false}=Astro.props;const d=entry.data;
+---
+<div data-tags={d.tags.join(',')}><div class="research-card" tabindex="0" aria-expanded="false" aria-label={`Expand ${d.title}`}><div class="card-grid"><div class="card-text"><h5><a href={`/research/${d.slug}/`}>{d.title}</a></h5><AuthorList authors={d.authors} visibleAuthorCount={d.visibleAuthorCount}/><div class="info-line"><span>{d.date}</span><div class="divider"></div><span class="venue"><Fragment set:html={d.venueHtml}/></span><div class="divider"></div><div class="tags-inline">{d.tags.map(t=><Tag name={t} color={linkedTags?({Algorithm:'lime',Theory:'green'} as Record<string,string>)[t]:undefined} href={linkedTags?`/research?tag=${encodeURIComponent(t)}`:undefined} filter={!linkedTags}/>)}</div></div><div class="card-details"><div class="card-details-inner"><p class="excerpt"><Fragment set:html={d.summaryHtml}/></p><div class="links-row">{d.resources.map(link=><a class="btn-ghost" href={link.url} target="_blank" rel="noopener noreferrer"><Fragment set:html={link.html}/></a>)}</div></div></div></div>{d.image&&<div class="card-image-col"><img class="card-image" src={d.image} alt={d.imageAlt}/></div>}</div></div></div>

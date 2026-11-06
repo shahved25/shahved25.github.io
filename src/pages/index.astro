@@ -1,0 +1,8 @@
+---
+import {getCollection} from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ResearchCard from '../components/ResearchCard.astro';
+import about from '../data/about.json';
+const research=(await getCollection('research')).filter(e=>e.data.selectedOnAbout).sort((a,b)=>a.data.cardOrder-b.data.cardOrder);
+---
+<SiteLayout section="About"><Fragment set:html={about.before}/>{research.map(entry=><ResearchCard entry={entry} linkedTags/>)}<Fragment set:html={about.after}/></SiteLayout>

@@ -1,0 +1,6 @@
+---
+interface Props { mobile?: boolean }
+const {mobile=false}=Astro.props;
+---
+<button id={mobile ? 'mobile-theme-toggle' : 'theme-toggle'} class={mobile?'mobile-theme-btn':'nav-link theme-btn'} aria-label="Toggle theme"><i class="fas fa-sun theme-sun" aria-hidden="true"></i><i class="fas fa-moon theme-moon" aria-hidden="true"></i></button>
+<style is:global>.theme-moon{display:none}html[data-theme=dark] .theme-sun{display:none}html[data-theme=dark] .theme-moon{display:inline-block}</style>

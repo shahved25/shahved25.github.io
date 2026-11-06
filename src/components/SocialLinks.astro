@@ -1,0 +1,4 @@
+---
+import {profile} from '../data/profile';
+---
+<div class="social-links">{profile.socials.map(s=><a class="social-icon-btn" href={s.href} aria-label={s.label} target={s.href.startsWith('http')?'_blank':undefined} rel={s.href.startsWith('http')?'noopener noreferrer':undefined}><i class={s.icon} aria-hidden="true"></i></a>)}</div>

@@ -1,0 +1,6 @@
+---
+interface Props {section:string}
+const {section}=Astro.props;
+const links=[['About','/'],['Experience','/experience/'],['Research','/research/'],['Posts','/posts/']];
+---
+<div class="page-nav-row"><a transition:name={`tab-${section.toLowerCase()}`} class="title-separate-link" href={links.find(([n])=>n===section)?.[1]}><h1 class="title-separate">{section}</h1></a><nav class="page-nav-tabs" aria-label="Main navigation">{links.filter(([n])=>n!==section).map(([n,href])=><a transition:name={`tab-${n.toLowerCase()}`} class="page-nav-link" href={href}>{n}</a>)}</nav></div>
